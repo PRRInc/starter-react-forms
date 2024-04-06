@@ -137,7 +137,7 @@ function App() {
                 <option value="bacon">Bacon</option>
               </select>
               <label>Likes swimming:</label>
-              <input type="checkbox" checked={checked} onChange={handleCheckboxChange} />
+              <input type="checkbox" checked={checked} onChange={(event) => handleCheckboxChange(event)} />
               <br />
               <input type="submit" />
             </form>
