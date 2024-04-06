@@ -23,8 +23,8 @@ function App() {
   const [checked, setChecked] = useState(false);
   const [selectOption, setSelectOption] = useState("");
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     addDog();
     resetDogForm();
     toggleNewDogForm();
@@ -103,7 +103,7 @@ function App() {
             {showNewDogForm ? "hide form" : "Add a new dog"}
           </button>
           {showNewDogForm ? (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <label htmlFor="name">Name:</label>
               <input
                 type="text"
