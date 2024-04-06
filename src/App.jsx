@@ -10,10 +10,11 @@ import { v1 as generateUniqueID } from "uuid";
 function App() {
   const [dogs, setDogs] = useState(dogsData);
   const [showNewDogForm, setNewDogForm] = useState(false);
+  const [present, setPresent] = useState(false);
   const [newDog, setNewDog] = useState({
     id: "",
     name: "",
-    present: false,
+    present: present,
     grade: 100,
     age: "",
     likesSwimming: "",
@@ -33,17 +34,31 @@ function App() {
 
   function handleSelectChange(event) {
     setSelectOption(event.target.value);
+    console.log(newDog);
   }
 
   function handleCheckboxChange() {
     setChecked(!checked);
+    console.log(newDog);
+  }
+
+  function handlePresentChange() {
+    setPresent(!present);
+    setNewDog({
+      ...newDog,
+      present: present,
+  });
+  // const newDogObj = structuredClone(newDog);
+  // newDogObj.present = present;
+  // setNewDog(newDogObj);
+    console.log(newDog);
   }
 
   function addDog() {
     const createDog = {
       id: generateUniqueID(),
       name: newDog.name,
-      present: false,
+      present: present,
       grade: 100,
       notes: "",
       age: newDog.age,
@@ -59,11 +74,13 @@ function App() {
       ...newDog,
       [event.target.id]: event.target.value,
     });
+    console.log(newDog);
   }
 
   function removeDog(dogID) {
     const filteredDogArray = dogs.filter((dog) => dog.id !== dogID);
     setDogs(filteredDogArray);
+    
   }
 
   function toggleNewDogForm() {
@@ -89,6 +106,7 @@ function App() {
       contact: "",
     });
     setChecked(false);
+    setPresent(false);
     setSelectOption("");
   }
 
@@ -138,6 +156,9 @@ function App() {
               </select>
               <label>Likes swimming:</label>
               <input type="checkbox" checked={checked} onChange={(event) => handleCheckboxChange(event)} />
+              <br />
+              <label>Present:</label>
+              <input type="checkbox" checked={present} onChange={(event) => handlePresentChange(event)} />
               <br />
               <input type="submit" />
             </form>
